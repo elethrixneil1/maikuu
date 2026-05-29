@@ -26,7 +26,7 @@
                         sans: ['Poppins', 'sans-serif'],
                     },
                     colors: {
-                        brand: '#FFD700', // The specific yellow from the image
+                        brand: '#FFD700',
                         dark: '#0a0a0a',
                         card: '#121212',
                         cardHover: '#1a1a1a'
@@ -78,26 +78,17 @@
         .eq-bar:nth-child(3) { animation-delay: 0.4s; }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #FFD700;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
 
         /* LED Visualizer Dots */
         .led-dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background-color: #333; /* default off state */
+            background-color: #333;
             box-shadow: 0 0 2px rgba(0,0,0,0.5);
             transition: all 0.1s;
         }
@@ -109,11 +100,9 @@
             background: radial-gradient(circle at 30% 30%, #444, #111);
             box-shadow: inset 0 0 5px rgba(0,0,0,1), 0 5px 10px rgba(0,0,0,0.5);
         }
-        .dial-indicator {
-            box-shadow: 0 0 8px #00ff00;
-        }
+        .dial-indicator { box-shadow: 0 0 8px #00ff00; }
         
-        /* Map Background for About Section */
+        /* Map Background */
         .ph-map-bg {
             background-image: radial-gradient(circle, rgba(255,215,0,0.1) 1px, transparent 1px);
             background-size: 15px 15px;
@@ -144,7 +133,6 @@
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
 
-        /* Header Dropdown Animation */
         @keyframes slideDown {
             from { transform: translateY(-100%); }
             to { transform: translateY(0); }
@@ -172,16 +160,15 @@
                 <p class="text-[8px] tracking-widest text-white mt-1 font-semibold uppercase">Your Music. Your Station.</p>
             </a>
 
-            <!-- Desktop Nav (Removed Programs & Schedule) -->
+            <!-- Desktop Nav -->
             <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm">
-                <a href="#home" class="nav-link text-brand border-b-2 border-brand pb-1">HOME</a>
-                <a href="#about" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">ABOUT</a>
-                <a href="#news" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">NEWS</a>
-                <a href="#contact" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">CONTACT</a>
+                <a href="#home" class="nav-link text-brand border-b-2 border-brand pb-1 active:scale-90 transform transition-all duration-200">HOME</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent active:scale-90 transform transition-all duration-200">ABOUT</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent active:scale-90 transform transition-all duration-200">CONTACT</a>
             </nav>
 
             <!-- Listen Live Btn -->
-            <button id="header-play-btn" onclick="togglePlay()" class="hidden md:flex items-center gap-2 border-2 border-brand text-brand hover:bg-brand hover:text-dark px-6 py-2 rounded-full font-bold transition-all group">
+            <button id="header-play-btn" onclick="togglePlay()" class="hidden md:flex items-center gap-2 border-2 border-brand text-brand hover:bg-brand hover:text-dark px-6 py-2 rounded-full font-bold transition-all group active:scale-95">
                 <i class="ph-fill ph-radio text-xl group-hover:animate-pulse" id="header-play-icon"></i>
                 <span id="header-play-text">LISTEN LIVE</span>
             </button>
@@ -213,11 +200,11 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
-                    <button id="hero-play-btn" onclick="togglePlay()" class="w-full sm:w-auto justify-center bg-brand text-dark hover:bg-yellow-400 px-6 sm:px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,215,0,0.4)] text-sm sm:text-base">
+                    <button id="hero-play-btn" onclick="togglePlay()" class="w-full sm:w-auto justify-center bg-brand text-dark hover:bg-yellow-400 px-6 sm:px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,215,0,0.4)] text-sm sm:text-base">
                         <i class="ph-fill ph-play-circle text-2xl" id="hero-play-icon"></i>
                         <span id="hero-play-text">LISTEN LIVE</span>
                     </button>
-                    <a href="#contact" class="w-full sm:w-auto justify-center border-2 border-gray-400 text-gray-300 hover:border-white hover:text-white px-6 sm:px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all text-sm sm:text-base">
+                    <a href="#contact" class="w-full sm:w-auto justify-center border-2 border-gray-400 text-gray-300 hover:border-white hover:text-white px-6 sm:px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all text-sm sm:text-base active:scale-95">
                         <i class="ph ph-chat-teardrop-text text-2xl"></i>
                         CONTACT US
                     </a>
@@ -259,7 +246,7 @@
                         </div>
 
                         <!-- Central Play Btn -->
-                        <button id="main-play-btn" onclick="togglePlay()" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand flex items-center justify-center text-brand hover:bg-brand hover:text-dark transition-all shadow-[0_0_15px_rgba(255,215,0,0.3)] shrink-0">
+                        <button id="main-play-btn" onclick="togglePlay()" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-brand flex items-center justify-center text-brand hover:bg-brand hover:text-dark transition-all shadow-[0_0_15px_rgba(255,215,0,0.3)] shrink-0 active:scale-90">
                             <i class="ph-fill ph-pause text-2xl sm:text-3xl" id="pause-icon" style="display: none;"></i>
                             <i class="ph-fill ph-play text-2xl sm:text-3xl" id="play-icon" style="margin-left: 4px;"></i>
                         </button>
@@ -277,7 +264,7 @@
                             <!-- Generated by JS -->
                         </div>
                         
-                        <!-- Dial Knob -->
+                        <!-- Dial Knob for Volume -->
                         <div class="relative w-12 h-12 rounded-full dial-knob border border-gray-700 cursor-pointer touch-none" id="volume-knob" onmousedown="startKnobDrag(event)" ontouchstart="startKnobDrag(event)">
                             <div id="knob-rotator" class="absolute inset-0 transition-none" style="transform: rotate(135deg);">
                                 <div class="absolute top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-green-500 dial-indicator"></div>
@@ -304,8 +291,6 @@
     <!-- FEATURES SECTION -->
     <section class="py-20 bg-dark border-t border-white/5 relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <!-- Card 1 -->
             <div class="bg-card hover:bg-cardHover p-8 rounded-2xl border border-white/5 transition-colors text-center group reveal-up">
                 <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                     <i class="ph ph-radio text-5xl text-brand group-hover:scale-110 transition-transform"></i>
@@ -313,8 +298,6 @@
                 <h3 class="text-xl font-bold text-brand mb-3">LIVE RADIO</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">Listen to Maiku 99.5 FM anytime, anywhere in the world.</p>
             </div>
-
-            <!-- Card 2 -->
             <div class="bg-card hover:bg-cardHover p-8 rounded-2xl border border-white/5 transition-colors text-center group reveal-up delay-100">
                 <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                     <i class="ph ph-music-notes text-5xl text-brand group-hover:scale-110 transition-transform"></i>
@@ -322,8 +305,6 @@
                 <h3 class="text-xl font-bold text-brand mb-3">BEST MUSIC</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">Today's hits, OPM favorites, and timeless classics non-stop.</p>
             </div>
-
-            <!-- Card 3 -->
             <div class="bg-card hover:bg-cardHover p-8 rounded-2xl border border-white/5 transition-colors text-center group reveal-up delay-200">
                 <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                     <i class="ph ph-users text-5xl text-brand group-hover:scale-110 transition-transform"></i>
@@ -331,8 +312,6 @@
                 <h3 class="text-xl font-bold text-brand mb-3">COMMUNITY</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">Proudly serving Nabua and the entire Bicol region.</p>
             </div>
-
-            <!-- Card 4 -->
             <div class="bg-card hover:bg-cardHover p-8 rounded-2xl border border-white/5 transition-colors text-center group reveal-up delay-300">
                 <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                     <i class="ph ph-microphone-stage text-5xl text-brand group-hover:scale-110 transition-transform"></i>
@@ -340,7 +319,6 @@
                 <h3 class="text-xl font-bold text-brand mb-3">ON-AIR TALENTS</h3>
                 <p class="text-gray-400 text-sm leading-relaxed">Fun and engaging DJs bringing good vibes every day.</p>
             </div>
-
         </div>
     </section>
 
@@ -348,12 +326,10 @@
     <section id="about" class="py-20 md:py-24 bg-dark relative overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
             
-            <!-- Left: Image -->
             <div class="relative group reveal-right">
                 <div class="absolute -inset-1 bg-brand opacity-20 rounded-2xl blur group-hover:opacity-30 transition duration-1000"></div>
                 <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                     <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop" alt="Maiku Radio Station Building" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
-                    <!-- Overlay Sign Mock -->
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                         <div class="border-2 border-brand/50 bg-black/60 backdrop-blur-sm p-6 rounded-lg text-center transform -skew-x-6">
                             <h2 class="text-4xl font-black text-white italic tracking-tight shadow-black drop-shadow-lg">MAIKU <span class="text-brand">99.5 FM</span></h2>
@@ -363,11 +339,8 @@
                 </div>
             </div>
 
-            <!-- Right: Content & Map -->
             <div class="relative reveal-left delay-200">
-                <!-- Abstract dotted map bg -->
                 <div class="absolute inset-0 ph-map-bg -z-10 -right-20"></div>
-                
                 <h2 class="text-brand font-bold text-lg mb-2 tracking-widest">ABOUT MAIKU 99.5 FM</h2>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">Broadcasting Excellence from the Heart of Bicol.</h3>
                 
@@ -381,11 +354,10 @@
                     Whether it’s music that inspires, stories that matter, or moments that bring listeners together, Maiku 99.5 FM is committed to being the soundtrack of everyday life in Bicol and beyond.
                 </p>
                 
-                <a href="#about" class="inline-flex items-center gap-2 border border-brand text-brand hover:bg-brand hover:text-dark px-8 py-3 rounded-full font-bold transition-colors">
+                <a href="#about" class="inline-flex items-center gap-2 border border-brand text-brand hover:bg-brand hover:text-dark px-8 py-3 rounded-full font-bold transition-colors active:scale-95 transform">
                     LEARN MORE <i class="ph-bold ph-caret-right"></i>
                 </a>
 
-                <!-- Map Pin overlay visual -->
                 <div class="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 flex flex-col items-center opacity-80 hidden md:flex">
                     <i class="ph-fill ph-map-pin text-red-500 text-4xl animate-bounce"></i>
                     <div class="bg-card border border-white/10 px-3 py-1 rounded mt-2 shadow-lg">
@@ -402,14 +374,12 @@
     <footer id="contact" class="bg-[#050505] border-t border-white/10 pt-16 pb-6">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 border-b border-white/10 pb-10">
             
-            <!-- Footer Logo -->
             <div class="flex flex-col items-start leading-none group">
                 <h1 class="text-4xl font-black italic tracking-tight flex items-center gap-1 text-white">MAIKU</h1>
                 <h2 class="text-brand font-black text-2xl italic tracking-tight -mt-1">99.5 FM</h2>
                 <p class="text-[9px] tracking-widest text-white mt-2 font-semibold uppercase">Your Music. Your Station.</p>
             </div>
 
-            <!-- Contact Info (Updated: No phone, new email) -->
             <div class="flex flex-col sm:flex-row gap-8 text-sm text-gray-400">
                 <div class="flex items-start gap-3">
                     <i class="ph-fill ph-map-pin text-brand text-xl"></i>
@@ -423,7 +393,6 @@
                 </div>
             </div>
 
-            <!-- On Air Badge (Moved left slightly since social is gone) -->
             <div class="flex flex-col items-center md:items-end gap-6">
                 <div class="flex items-center gap-3 bg-brand text-dark px-6 py-3 rounded-xl font-black text-xl leading-none">
                     <i class="ph-fill ph-microphone-stage text-3xl"></i>
@@ -435,7 +404,6 @@
             </div>
 
         </div>
-
         <div class="text-center pt-6 text-xs text-gray-600">
             &copy; 2026 Maiku 99.5 FM. All Rights Reserved.
         </div>
@@ -443,7 +411,20 @@
 
     <!-- Scripts -->
     <script>
-        // Smooth Scrolling Animation for Navigation Buttons
+        // Smooth Scrolling & Navigation Sync Animation
+        function updateNavState(hash) {
+            if (!hash || hash === '') hash = '#home';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === hash) {
+                    link.classList.remove('text-gray-300', 'border-transparent');
+                    link.classList.add('text-brand', 'border-brand');
+                } else {
+                    link.classList.remove('text-brand', 'border-brand');
+                    link.classList.add('text-gray-300', 'border-transparent');
+                }
+            });
+        }
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
@@ -452,18 +433,8 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     e.preventDefault();
-                    
-                    // Update active state in nav
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('text-brand', 'border-brand');
-                        link.classList.add('text-gray-300', 'border-transparent');
-                    });
-                    if (this.classList.contains('nav-link')) {
-                        this.classList.remove('text-gray-300', 'border-transparent');
-                        this.classList.add('text-brand', 'border-brand');
-                    }
-
-                    // Smooth scroll to the section
+                    history.pushState(null, null, targetId);
+                    updateNavState(targetId);
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
@@ -472,18 +443,30 @@
             });
         });
 
-        // Scroll Reveal Animation Initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
+        window.addEventListener('popstate', () => {
+            const currentHash = window.location.hash || '#home';
+            updateNavState(currentHash);
+            const targetElement = document.querySelector(currentHash);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
 
+        window.addEventListener('DOMContentLoaded', () => {
+            updateNavState(window.location.hash);
+        });
+
+        // Scroll Reveal Animation Initialization (Two-way Animation)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
+                        // Papasok ang element (Show)
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target); // Only animate once
+                    } else {
+                        // Magtatago ulit ang element kapag iniscroll pataas/pababa na lagpas sa kanya (Hide)
+                        entry.target.classList.remove('active');
                     }
                 });
             }, observerOptions);
@@ -491,205 +474,6 @@
             const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
             revealElements.forEach(el => observer.observe(el));
         });
-
-        // Audio Player Logic
-        const audio = document.getElementById('radio-stream');
-        const playIcon = document.getElementById('play-icon');
-        const pauseIcon = document.getElementById('pause-icon');
-        
-        // Other buttons
-        const headerPlayText = document.getElementById('header-play-text');
-        const headerPlayIcon = document.getElementById('header-play-icon');
-        const heroPlayText = document.getElementById('hero-play-text');
-        const heroPlayIcon = document.getElementById('hero-play-icon');
-        
-        let isPlaying = false;
-        
-        // Web Audio API Variables para sa totoong VU Meter
-        let audioCtx = null;
-        let analyser = null;
-        let dataArray = null;
-        let source = null;
-        let corsBlocked = false; 
-        let silentFrames = 0;    
-
-        function initAudioContext() {
-            if (!audioCtx) {
-                try {
-                    const AudioContext = window.AudioContext || window.webkitAudioContext;
-                    audioCtx = new AudioContext();
-                    analyser = audioCtx.createAnalyser();
-                    analyser.fftSize = 64; // Mas maliit (64) para mas mabilis mag-react sa bass
-                    
-                    // Siguraduhing anonymous ang tawag bago mag-connect
-                    audio.crossOrigin = "anonymous";
-                    
-                    source = audioCtx.createMediaElementSource(audio);
-                    source.connect(analyser);
-                    analyser.connect(audioCtx.destination);
-                    
-                    dataArray = new Uint8Array(analyser.frequencyBinCount);
-                } catch(e) {
-                    console.error("Hindi ma-access ang Web Audio API (CORS issue):", e);
-                }
-            }
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-        }
-
-        function togglePlay() {
-            const npContainer = document.getElementById('now-playing-container');
-            
-            if (isPlaying) {
-                audio.pause();
-                // Show play icon, hide pause
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-                
-                // Itago ang Now Playing Container
-                if(npContainer) npContainer.style.display = 'none';
-                
-                // Update other buttons text to Listen
-                if(headerPlayText) headerPlayText.innerText = 'LISTEN LIVE';
-                if(headerPlayIcon) headerPlayIcon.className = 'ph-fill ph-radio text-xl group-hover:animate-pulse';
-                if(heroPlayText) heroPlayText.innerText = 'LISTEN LIVE';
-                if(heroPlayIcon) heroPlayIcon.className = 'ph-fill ph-play-circle text-2xl';
-                
-                stopVisualizer();
-            } else {
-                // FORCE REFRESH (Cache Buster): Trick para hindi i-block ng browser (CORS) ang audio data
-                audio.src = "https://stream.zeno.fm/aef1z5aiz16uv?nocache=" + new Date().getTime();
-                audio.load(); 
-                audio.play();
-                
-                // Show pause icon, hide play
-                playIcon.style.display = 'none';
-                pauseIcon.style.display = 'block';
-                
-                // Ipakita ang Now Playing Container
-                if(npContainer) npContainer.style.display = 'block';
-                
-                // Update other buttons text to Pause
-                if(headerPlayText) headerPlayText.innerText = 'PAUSE';
-                if(headerPlayIcon) headerPlayIcon.className = 'ph-fill ph-pause-circle text-xl';
-                if(heroPlayText) heroPlayText.innerText = 'PAUSE STREAM';
-                if(heroPlayIcon) heroPlayIcon.className = 'ph-fill ph-pause-circle text-2xl';
-                
-                // I-initialize at buksan ang Web Audio bago simulan ang visualizer
-                initAudioContext();
-                startVisualizer();
-            }
-            isPlaying = !isPlaying;
-            
-            // I-update ang title kapag pinindot ang Play/Pause
-            if (typeof updateTitleDisplay === 'function') updateTitleDisplay();
-        }
-
-        // --- Volume & Drag Controls Logic ---
-        const volumeLevel = document.getElementById('volume-level');
-        const volIconLow = document.getElementById('vol-icon-low');
-        const knobRotator = document.getElementById('knob-rotator');
-        
-        let currentVolume = 1; // 100% Volume by default
-        let isDraggingVolume = false;
-        let isDraggingKnob = false;
-
-        audio.volume = currentVolume;
-
-        function setVolume(val) {
-            currentVolume = val;
-            audio.volume = currentVolume;
-            updateVolumeUI();
-        }
-
-        // Linear Slider Handling
-        function startVolumeDrag(e) {
-            isDraggingVolume = true;
-            handleVolumeMove(e);
-        }
-
-        function handleVolumeMove(e) {
-            if (!isDraggingVolume) return;
-            const slider = document.getElementById('volume-slider');
-            const rect = slider.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            let percentage = (clientX - rect.left) / rect.width;
-            
-            percentage = Math.max(0, Math.min(1, percentage));
-            setVolume(percentage);
-        }
-
-        // Dial Knob Handling
-        function startKnobDrag(e) {
-            e.preventDefault();
-            isDraggingKnob = true;
-        }
-
-        function handleKnobMove(e) {
-            if (!isDraggingKnob) return;
-            const knob = document.getElementById('volume-knob');
-            const rect = knob.getBoundingClientRect();
-            
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            
-            const deltaX = clientX - centerX;
-            const deltaY = clientY - centerY;
-            let deg = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-            
-            // Adjust coordinates so top is 0
-            deg = deg + 90;
-            if (deg > 180) deg -= 360; 
-            
-            // Clamp angles to our min/max (-135deg to 135deg)
-            if (deg < -135 && deg > -180) deg = -135;
-            if (deg > 135 || deg < -135) {
-               deg = (deg < 0) ? -135 : 135;
-            }
-            
-            let percentage = (deg + 135) / 270;
-            percentage = Math.max(0, Math.min(1, percentage));
-            setVolume(percentage);
-        }
-
-        // Global Drag Listeners
-        window.addEventListener('mousemove', (e) => {
-            handleVolumeMove(e);
-            handleKnobMove(e);
-        });
-        window.addEventListener('touchmove', (e) => {
-            handleVolumeMove(e);
-            handleKnobMove(e);
-        }, {passive: false});
-
-        window.addEventListener('mouseup', () => {
-            isDraggingVolume = false;
-            isDraggingKnob = false;
-        });
-        window.addEventListener('touchend', () => {
-            isDraggingVolume = false;
-            isDraggingKnob = false;
-        });
-
-        function updateVolumeUI() {
-            if (volumeLevel) {
-                volumeLevel.style.width = (currentVolume * 100) + '%';
-            }
-            if (volIconLow) {
-                if (currentVolume === 0) {
-                    volIconLow.className = 'ph-fill ph-speaker-x text-2xl text-red-500';
-                } else {
-                    volIconLow.className = 'ph-fill ph-speaker-low text-2xl';
-                }
-            }
-            if (knobRotator) {
-                const rot = -135 + (currentVolume * 270);
-                knobRotator.style.transform = `rotate(${rot}deg)`;
-            }
-        }
 
         // Header Background on Scroll
         window.addEventListener('scroll', () => {
@@ -703,18 +487,142 @@
             }
         });
 
-        // --- LED Visualizer Logic (Reliable Simulation) ---
+        // Audio Player Logic
+        const audio = document.getElementById('radio-stream');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const headerPlayText = document.getElementById('header-play-text');
+        const headerPlayIcon = document.getElementById('header-play-icon');
+        const heroPlayText = document.getElementById('hero-play-text');
+        const heroPlayIcon = document.getElementById('hero-play-icon');
+        
+        let isPlaying = false;
+        let audioCtx = null;
+        let analyser = null;
+        let dataArray = null;
+        let source = null;
+        let corsBlocked = false; 
+        let silentFrames = 0;   
+
+        function initAudioContext() {
+            if (!audioCtx) {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    audioCtx = new AudioContext();
+                    analyser = audioCtx.createAnalyser();
+                    analyser.fftSize = 64; 
+                    
+                    audio.crossOrigin = "anonymous";
+                    source = audioCtx.createMediaElementSource(audio);
+                    source.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+                    
+                    dataArray = new Uint8Array(analyser.frequencyBinCount);
+                } catch(e) {
+                    console.warn("Web Audio API CORS Blocked:", e);
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function togglePlay() {
+            const npContainer = document.getElementById('now-playing-container');
+            
+            if (isPlaying) {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                if(npContainer) npContainer.style.display = 'none';
+                
+                if(headerPlayText) headerPlayText.innerText = 'LISTEN LIVE';
+                if(headerPlayIcon) headerPlayIcon.className = 'ph-fill ph-radio text-xl group-hover:animate-pulse';
+                if(heroPlayText) heroPlayText.innerText = 'LISTEN LIVE';
+                if(heroPlayIcon) heroPlayIcon.className = 'ph-fill ph-play-circle text-2xl';
+                
+                stopVisualizer();
+            } else {
+                audio.src = "https://stream.zeno.fm/aef1z5aiz16uv?nocache=" + new Date().getTime();
+                audio.load(); 
+                audio.play();
+                
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                if(npContainer) npContainer.style.display = 'block';
+                
+                if(headerPlayText) headerPlayText.innerText = 'PAUSE';
+                if(headerPlayIcon) headerPlayIcon.className = 'ph-fill ph-pause-circle text-xl';
+                if(heroPlayText) heroPlayText.innerText = 'PAUSE STREAM';
+                if(heroPlayIcon) heroPlayIcon.className = 'ph-fill ph-pause-circle text-2xl';
+                
+                initAudioContext();
+                startVisualizer();
+            }
+            isPlaying = !isPlaying;
+            if (typeof updateTitleDisplay === 'function') updateTitleDisplay();
+        }
+
+        // --- Volume & Drag Controls Logic ---
+        const knobRotator = document.getElementById('knob-rotator');
+        let currentVolume = 1; 
+        let isDraggingKnob = false;
+
+        audio.volume = currentVolume;
+
+        function setVolume(val) {
+            currentVolume = val;
+            audio.volume = currentVolume;
+            if (knobRotator) {
+                const rot = -135 + (currentVolume * 270);
+                knobRotator.style.transform = `rotate(${rot}deg)`;
+            }
+        }
+
+        function startKnobDrag(e) {
+            e.preventDefault();
+            isDraggingKnob = true;
+        }
+
+        function handleKnobMove(e) {
+            if (!isDraggingKnob) return;
+            const knob = document.getElementById('volume-knob');
+            if (!knob) return;
+            const rect = knob.getBoundingClientRect();
+            
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            const deltaX = clientX - centerX;
+            const deltaY = clientY - centerY;
+            let deg = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+            
+            deg = deg + 90;
+            if (deg > 180) deg -= 360; 
+            
+            if (deg < -135 && deg > -180) deg = -135;
+            if (deg > 135 || deg < -135) deg = (deg < 0) ? -135 : 135;
+            
+            let percentage = (deg + 135) / 270;
+            percentage = Math.max(0, Math.min(1, percentage));
+            setVolume(percentage);
+        }
+
+        window.addEventListener('mousemove', handleKnobMove);
+        window.addEventListener('touchmove', handleKnobMove, {passive: false});
+        window.addEventListener('mouseup', () => isDraggingKnob = false);
+        window.addEventListener('touchend', () => isDraggingKnob = false);
+
+        // --- LED Visualizer Logic (Reliable Simulation & Audio Read) ---
         const ledMatrix = document.getElementById('led-matrix');
         const cols = 18;
         let ledElements = [];
         let smoothedLevel = 0;
         let visualizerTimeout = null;
 
-        // Generate LEDs
         for(let i = 0; i < cols; i++) {
             const colDiv = document.createElement('div');
             colDiv.className = 'flex flex-col gap-1';
-            
             let colorClass = 'green';
             if(i >= 10 && i < 15) colorClass = 'yellow';
             if(i >= 15) colorClass = 'red';
@@ -726,7 +634,7 @@
 
             colDiv.appendChild(dotTop);
             colDiv.appendChild(dotBottom);
-            ledMatrix.appendChild(colDiv);
+            if(ledMatrix) ledMatrix.appendChild(colDiv);
             
             ledElements.push({top: dotTop, bottom: dotBottom});
         }
@@ -743,65 +651,40 @@
             });
         }
 
-        // Real VU Meter reading from Live Audio Stream with Auto-Fallback
         function renderFrame() {
             if (!isPlaying) return;
-            
             let targetLevel = 0;
 
             if (analyser && dataArray && !corsBlocked) {
-                // Kunin ang frequency data ng audio
                 analyser.getByteFrequencyData(dataArray);
-                
                 let sum = 0;
-                let validDataCount = dataArray.length; // usually 32 (half of fftSize 64)
+                let validDataCount = dataArray.length; 
+                for (let i = 0; i < validDataCount; i++) sum += dataArray[i];
                 
-                // Pagsamasamahin ang lakas ng sound waves
-                for (let i = 0; i < validDataCount; i++) {
-                    sum += dataArray[i];
-                }
-                
-                // --- CORS BLOCK DETECTION ---
-                // Kapag tumutugtog pero puro 0 ang binibigay ng browser
                 if (sum === 0 && !audio.paused && audio.currentTime > 0) {
                     silentFrames++;
-                    if (silentFrames > 50) {
-                        console.warn("Zeno.fm audio data is strictly blocked by browser (CORS). Switching to Smart Simulation.");
-                        corsBlocked = true; // Ilipat sa Simulation Mode
-                    }
+                    if (silentFrames > 50) corsBlocked = true; 
                 } else {
                     silentFrames = 0;
                 }
 
-                // Kunin ang average ng volume kung hindi blocked
                 let avg = sum / validDataCount;
-                
-                // Boosted multiplier (2.5x) para mas pumalo ang bass
                 let peak = (avg / 255) * 2.5; 
                 targetLevel = peak * cols * currentVolume;
             }
 
-            // --- SMART SIMULATION FALLBACK ---
-            // Kapag strictly blocked ng browser ang Zeno URL, ito ang a-andar
             if (corsBlocked || !analyser) {
                 let simPeak = Math.random() * 0.4; 
-                // Random beat spikes
                 if (Math.random() > 0.8) simPeak += 0.5; 
                 targetLevel = simPeak * cols * currentVolume;
             }
 
-            // Para hindi magmukhang patay kung mahina ang audio part pero naka-todo ang volume
-            if (currentVolume > 0 && targetLevel < 1.5 && Math.random() > 0.5) {
-                targetLevel = 1.5;
-            }
-
+            if (currentVolume > 0 && targetLevel < 1.5 && Math.random() > 0.5) targetLevel = 1.5;
             if (targetLevel > cols) targetLevel = cols;
 
-            // Smooth transition (parang totoong hardware)
             smoothedLevel = smoothedLevel + (targetLevel - smoothedLevel) * 0.3;
             updateLEDs(smoothedLevel);
             
-            // Gagamit ng requestAnimationFrame para mas mabilis at smooth kaysa sa setTimeout
             visualizerTimeout = requestAnimationFrame(renderFrame);
         }
 
@@ -824,10 +707,8 @@
         let isServerConnected = false;
         let currentStreamTitle = "Maiku 99.5 FM - Live";
 
-        // Dynamic UI Updater para sa Status
         function updateTitleDisplay() {
             if (!nowPlayingTitle) return;
-            
             if (!isServerConnected) {
                 nowPlayingTitle.innerText = "Disconnected";
                 nowPlayingTitle.className = "font-medium text-sm truncate max-w-[250px] transition-all text-red-500";
@@ -858,22 +739,18 @@
                     } else {
                         currentStreamTitle = "Maiku 99.5 FM - Live";
                     }
-                } catch (e) {
-                    console.error('Error parsing metadata:', e);
-                }
+                } catch (e) {}
                 updateTitleDisplay();
             };
 
             evtSource.onerror = function(err) {
-                console.error('SSE Error / Server Disconnected');
                 isServerConnected = false;
                 updateTitleDisplay();
             };
 
-            // Makinig din sa mismong audio tag kung nagka-error (ex. no internet)
             audio.addEventListener('error', function() {
                 isServerConnected = false;
-                if (isPlaying) togglePlay(); // Auto-pause ang UI
+                if (isPlaying) togglePlay(); 
                 updateTitleDisplay();
             });
         }
