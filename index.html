@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth scroll-pt-24">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -172,13 +172,12 @@
                 <p class="text-[8px] tracking-widest text-white mt-1 font-semibold uppercase">Your Music. Your Station.</p>
             </a>
 
-            <!-- Desktop Nav (Removed Programs) -->
+            <!-- Desktop Nav (Removed Programs & Schedule) -->
             <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm">
-                <a href="#home" class="text-brand border-b-2 border-brand pb-1">HOME</a>
-                <a href="#about" class="text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">ABOUT</a>
-                <a href="#schedule" class="text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">SCHEDULE</a>
-                <a href="#news" class="text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">NEWS</a>
-                <a href="#contact" class="text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">CONTACT</a>
+                <a href="#home" class="nav-link text-brand border-b-2 border-brand pb-1">HOME</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">ABOUT</a>
+                <a href="#news" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">NEWS</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent transition-all">CONTACT</a>
             </nav>
 
             <!-- Listen Live Btn -->
@@ -444,6 +443,35 @@
 
     <!-- Scripts -->
     <script>
+        // Smooth Scrolling Animation for Navigation Buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Update active state in nav
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('text-brand', 'border-brand');
+                        link.classList.add('text-gray-300', 'border-transparent');
+                    });
+                    if (this.classList.contains('nav-link')) {
+                        this.classList.remove('text-gray-300', 'border-transparent');
+                        this.classList.add('text-brand', 'border-brand');
+                    }
+
+                    // Smooth scroll to the section
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
         // Scroll Reveal Animation Initialization
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
