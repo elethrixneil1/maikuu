@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth scroll-pt-24">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Maiku 99.5 FM | Your Music. Your Station.</title>
     
     <!-- Website Favicon -->
@@ -45,6 +44,7 @@
             background-color: #0a0a0a;
             color: #ffffff;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .glass-player {
@@ -81,14 +81,28 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
 
-        /* LED Segment styling based on hardware image_74d6e9.png */
+        /* Responsive LED dots to prevent overflow on small mobile displays */
         .led-dot {
-            width: 7px;
-            height: 7px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background-color: #1e1e20;
             box-shadow: inset 0 1px 1px rgba(0,0,0,0.85), 0 1px 0 rgba(255,255,255,0.03);
             transition: all 0.05s ease-in-out;
+        }
+        
+        @media (min-width: 380px) {
+            .led-dot {
+                width: 6.5px;
+                height: 6.5px;
+            }
+        }
+
+        @media (min-width: 440px) {
+            .led-dot {
+                width: 7.5px;
+                height: 7.5px;
+            }
         }
         
         .led-dot.active.green { background-color: #00ff55; box-shadow: 0 0 8px #00ff55, inset 0 1px 0 rgba(255,255,255,0.4); }
@@ -144,54 +158,72 @@
 </head>
 <body class="antialiased">
 
-    <!-- AUDIO CORE -->
     <audio id="radio-stream" src="https://stream.zeno.fm/aef1z5aiz16uv" preload="none" crossorigin="anonymous"></audio>
 
-    <!-- HEADER -->
-    <header class="fixed w-full top-0 z-50 bg-dark/90 backdrop-blur-md border-b border-white/5 transition-all duration-300 header-anim" id="header">
+    <!-- HEADER & NAVIGATION -->
+    <header class="fixed w-full top-0 z-50 bg-dark/95 backdrop-blur-md border-b border-white/5 transition-all duration-300 header-anim" id="header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             
             <a href="#" class="flex flex-col items-start leading-none group">
-                <h1 class="text-3xl font-black italic tracking-tight flex items-center gap-1">
+                <h1 class="text-2xl sm:text-3xl font-black italic tracking-tight flex items-center gap-1">
                     <span class="text-white group-hover:text-brand transition-colors">MAIKU</span>
                 </h1>
-                <h2 class="text-brand font-black text-xl italic tracking-tight -mt-1">99.5 FM</h2>
-                <p class="text-[8px] tracking-widest text-white mt-1 font-semibold uppercase">Your Music. Your Station.</p>
+                <h2 class="text-brand font-black text-lg sm:text-xl italic tracking-tight -mt-1">99.5 FM</h2>
+                <p class="text-[7px] sm:text-[8px] tracking-widest text-white mt-1 font-semibold uppercase">Your Music. Your Station.</p>
             </a>
 
+            <!-- Desktop & Tablet Navigation Menu -->
             <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm">
                 <a href="#home" class="nav-link text-brand border-b-2 border-brand pb-1 active:scale-90 transform transition-all duration-200">HOME</a>
                 <a href="#about" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent active:scale-90 transform transition-all duration-200">ABOUT US</a>
                 <a href="#contact" class="nav-link text-gray-300 hover:text-brand hover:border-b-2 hover:border-brand pb-1 border-b-2 border-transparent active:scale-90 transform transition-all duration-200">CONTACT</a>
             </nav>
 
-            <button id="header-play-btn" onclick="togglePlay()" class="hidden md:flex items-center gap-2 border-2 border-brand text-brand hover:bg-brand hover:text-dark px-6 py-2 rounded-full font-bold transition-all group active:scale-95">
-                <i class="ph-fill ph-radio text-xl group-hover:animate-pulse" id="header-play-icon"></i>
-                <span id="header-play-text">LISTEN LIVE</span>
-            </button>
+            <div class="flex items-center gap-3">
+                <button id="header-play-btn" onclick="togglePlay()" class="hidden md:flex items-center gap-2 border-2 border-brand text-brand hover:bg-brand hover:text-dark px-6 py-2 rounded-full font-bold transition-all group active:scale-95">
+                    <i class="ph-fill ph-radio text-xl group-hover:animate-pulse" id="header-play-icon"></i>
+                    <span id="header-play-text">LISTEN LIVE</span>
+                </button>
+
+                <!-- Responsive Mobile Menu Trigger Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="lg:hidden text-white hover:text-brand text-3xl focus:outline-none p-1" aria-label="Toggle Navigation Menu">
+                    <i class="ph ph-list" id="mobile-menu-icon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
+    <!-- Responsive Mobile Overlay Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 z-40 bg-dark/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col justify-center items-center gap-8 font-bold text-2xl">
+        <a href="#home" onclick="toggleMobileMenu()" class="text-brand hover:scale-105 transition-transform">HOME</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand hover:scale-105 transition-transform">ABOUT US</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="text-gray-300 hover:text-brand hover:scale-105 transition-transform">CONTACT</a>
+        <button onclick="togglePlay(); toggleMobileMenu();" class="flex items-center gap-2 border-2 border-brand text-brand hover:bg-brand hover:text-dark px-8 py-3 rounded-full font-bold transition-all active:scale-95 mt-4 text-lg">
+            <i class="ph-fill ph-radio text-2xl"></i>
+            <span>LISTEN LIVE</span>
+        </button>
+    </div>
+
     <!-- HERO SECTION -->
-    <section id="home" class="relative min-h-screen pt-28 pb-12 flex items-center bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full grid lg:grid-cols-2 gap-12 items-center z-10 relative">
+    <section id="home" class="relative min-h-screen pt-24 pb-12 flex items-center bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full grid lg:grid-cols-2 gap-10 lg:gap-12 items-center z-10 relative">
             
-            <div class="space-y-6 reveal-right">
+            <div class="space-y-6 reveal-right pt-6 lg:pt-0">
                 <div class="flex items-center gap-2 text-red-500 font-bold tracking-wider text-xs sm:text-sm">
                     <div class="w-3 h-3 bg-red-500 rounded-full live-dot"></div>
                     LIVE ON AIR
                 </div>
                 
-                <h1 class="text-6xl sm:text-7xl md:text-8xl font-black text-white leading-none tracking-tight">
+                <h1 class="text-5xl sm:text-7xl md:text-8xl font-black text-white leading-none tracking-tight">
                     MAIKU<br>
                     <span class="text-brand">99.5</span> FM
                 </h1>
                 
-                <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                <h2 class="text-lg sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
                     Your Music. <span class="text-brand">Your Station.</span>
                 </h2>
                 
-                <p class="text-gray-300 text-base sm:text-lg max-w-lg leading-relaxed">
+                <p class="text-gray-300 text-sm sm:text-lg max-w-lg leading-relaxed">
                     Broadcasting live from Nabua, Camarines Sur, Bicol Philippines. Bringing you the best music, entertainment, news, and public service 24/7.
                 </p>
                 
@@ -209,15 +241,15 @@
 
             <!-- PLAYER MODULE (Matching image_74d6e9.png) -->
             <div class="flex justify-center lg:justify-end reveal-left delay-200">
-                <div class="glass-player rounded-[2rem] p-5 sm:p-6 md:p-8 w-full max-w-md relative overflow-hidden">
+                <div class="glass-player rounded-[2rem] p-4 sm:p-6 md:p-8 w-full max-w-md relative overflow-hidden">
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand/10 rounded-full blur-3xl -z-10"></div>
                     
-                    <div class="text-center mb-6 mt-2">
-                        <h3 class="text-4xl font-black text-white tracking-tight drop-shadow-md">MAIKU 99.5 FM</h3>
+                    <div class="text-center mb-4 sm:mb-6 mt-1">
+                        <h3 class="text-3xl sm:text-4xl font-black text-white tracking-tight drop-shadow-md">MAIKU 99.5 FM</h3>
                     </div>
 
-                    <div id="now-playing-container" style="display: none;" class="text-center mb-10 bg-black/20 py-4 rounded-2xl border border-white/5 backdrop-blur-sm shadow-inner transition-all duration-300">
-                        <div class="flex justify-center items-center gap-2 text-brand font-bold tracking-widest text-xs mb-2">
+                    <div id="now-playing-container" style="display: none;" class="text-center mb-6 sm:mb-8 bg-black/20 py-3 sm:py-4 rounded-2xl border border-white/5 backdrop-blur-sm shadow-inner transition-all duration-300">
+                        <div class="flex justify-center items-center gap-2 text-brand font-bold tracking-widest text-xs mb-1.5">
                             <div class="flex items-end h-3 gap-[2px]">
                                 <div class="w-1 bg-brand eq-bar rounded-t-sm"></div>
                                 <div class="w-1 bg-brand eq-bar rounded-t-sm"></div>
@@ -227,11 +259,11 @@
                         </div>
                         <div class="flex items-center justify-center gap-2 text-brand px-4">
                             <i class="ph-fill ph-music-notes text-sm shrink-0"></i>
-                            <p id="now-playing-title" class="font-medium text-sm truncate max-w-[250px] transition-all font-semibold">Checking feed status...</p>
+                            <p id="now-playing-title" class="font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all font-semibold">Checking feed status...</p>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-center mb-8 gap-4 px-4">
+                    <div class="flex items-center justify-center mb-6 sm:mb-8 gap-4 px-4">
                         <div class="flex-1 h-1 bg-gray-700 rounded-full relative overflow-hidden">
                             <div class="absolute inset-0 bg-brand/30 animate-pulse"></div>
                         </div>
@@ -246,37 +278,37 @@
                         </div>
                     </div>
 
-                    <!-- WIDESCREEN VU METER & ROTARY DIAL (Directly aligned with image_74d6e9.png) -->
-                    <div class="bg-[#0b0b0d] rounded-2xl p-5 border border-white/[0.04] flex flex-row items-center justify-between gap-4 shadow-inner">
+                    <!-- WIDESCREEN VU METER & ROTARY DIAL (Aligned with image_74d6e9.png) -->
+                    <div class="bg-[#0b0b0d] rounded-2xl p-4 sm:p-5 border border-white/[0.04] flex flex-row items-center justify-between gap-3 sm:gap-4 shadow-inner">
                         
                         <!-- Symmetrical Horizontal LED Rows (24 segments each, Left Channel Top, Right Channel Bottom) -->
-                        <div class="flex flex-col gap-2 flex-1 overflow-hidden" id="led-matrix-wrapper">
-                            <div class="flex gap-[3.5px] w-full justify-between" id="led-row-left">
+                        <div class="flex flex-col gap-1.5 sm:gap-2 flex-1 overflow-hidden" id="led-matrix-wrapper">
+                            <div class="flex gap-[2px] sm:gap-[3.5px] w-full justify-between" id="led-row-left">
                                 <!-- Dynamic LED columns loaded by JavaScript -->
                             </div>
-                            <div class="flex gap-[3.5px] w-full justify-between" id="led-row-right">
+                            <div class="flex gap-[2px] sm:gap-[3.5px] w-full justify-between" id="led-row-right">
                                 <!-- Dynamic LED columns loaded by JavaScript -->
                             </div>
                         </div>
                         
                         <!-- Charcoal Rotary Dial with Cardinal Slate Calibration Markers -->
-                        <div class="relative w-20 h-20 flex items-center justify-center select-none shrink-0">
-                            <div class="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-                            <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-                            <div class="absolute left-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
-                            <div class="absolute right-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-slate-600 rounded-full"></div>
+                        <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center select-none shrink-0">
+                            <div class="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-slate-600 rounded-full"></div>
+                            <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-slate-600 rounded-full"></div>
+                            <div class="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-slate-600 rounded-full"></div>
+                            <div class="absolute right-1 top-1/2 -translate-y-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-slate-600 rounded-full"></div>
                             
                             <!-- Volume Rotary Dial Knob -->
-                            <div id="volume-knob" class="relative w-14 h-14 rounded-full dial-knob border border-[#1a1a1c] cursor-pointer touch-none" onmousedown="startKnobDrag(event)" ontouchstart="startKnobDrag(event)">
+                            <div id="volume-knob" class="relative w-11 h-11 sm:w-14 sm:h-14 rounded-full dial-knob border border-[#1a1a1c] cursor-pointer touch-none" onmousedown="startKnobDrag(event)" ontouchstart="startKnobDrag(event)">
                                 <div id="knob-rotator" class="absolute inset-0 pointer-events-none transition-none" style="transform: rotate(135deg);">
-                                    <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-[#00ff55] shadow-[0_0_10px_#00ff55] dial-indicator"></div>
+                                    <div class="absolute top-1.5 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#00ff55] shadow-[0_0_10px_#00ff55] dial-indicator"></div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="text-center mt-6 flex justify-center items-center gap-2 text-red-500 font-bold text-xs tracking-widest">
+                    <div class="text-center mt-5 sm:mt-6 flex justify-center items-center gap-2 text-red-500 font-bold text-[10px] sm:text-xs tracking-widest">
                         <i class="ph ph-broadcast"></i>
                         LIVE STREAM BROADCAST
                         <i class="ph ph-broadcast"></i>
@@ -287,38 +319,38 @@
     </section>
 
     <!-- FEATURES SECTION -->
-    <section class="py-20 bg-dark border-t border-white/5 relative z-20">
+    <section class="py-16 sm:py-20 bg-dark border-t border-white/5 relative z-20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-card hover:bg-cardHover p-8 rounded-2xl border border-white/5 transition-all duration-300 text-center group reveal-up shadow-lg">
-                <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                    <i class="ph ph-radio text-5xl text-brand group-hover:scale-110 transition-transform"></i>
+            <div class="bg-card hover:bg-cardHover p-6 sm:p-8 rounded-2xl border border-white/5 transition-all duration-300 text-center group reveal-up shadow-lg">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 flex items-center justify-center">
+                    <i class="ph ph-radio text-4xl sm:text-5xl text-brand group-hover:scale-110 transition-transform"></i>
                 </div>
-                <h3 class="text-xl font-bold text-brand mb-3">LIVE RADIO</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Listen to Maiku 99.5 FM anytime, anywhere in the world.</p>
+                <h3 class="text-lg sm:text-xl font-bold text-brand mb-2 sm:mb-3">LIVE RADIO</h3>
+                <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Listen to Maiku 99.5 FM anytime, anywhere in the world.</p>
             </div>
             
-            <div class="bg-card hover:bg-cardHover p-8 rounded-2xl border border-white/5 transition-all duration-300 text-center group reveal-up delay-200 shadow-lg">
-                <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
-                    <i class="ph ph-music-notes text-5xl text-brand group-hover:scale-110 transition-transform"></i>
+            <div class="bg-card hover:bg-cardHover p-6 sm:p-8 rounded-2xl border border-white/5 transition-all duration-300 text-center group reveal-up delay-200 shadow-lg">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 sm:mb-6 flex items-center justify-center">
+                    <i class="ph ph-music-notes text-4xl sm:text-5xl text-brand group-hover:scale-110 transition-transform"></i>
                 </div>
-                <h3 class="text-xl font-bold text-brand mb-3">BEST MUSIC MIX</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Today's hits, OPM favorites, and timeless classics non-stop.</p>
+                <h3 class="text-lg sm:text-xl font-bold text-brand mb-2 sm:mb-3">BEST MUSIC MIX</h3>
+                <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Today's hits, OPM favorites, and timeless classics non-stop.</p>
             </div>
         </div>
     </section>
 
     <!-- ABOUT SECTION -->
-    <section id="about" class="py-20 md:py-24 bg-dark relative overflow-hidden border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section id="about" class="py-16 sm:py-20 md:py-24 bg-dark relative overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
             
             <div class="relative group reveal-right">
                 <div class="absolute -inset-1 bg-brand opacity-20 rounded-2xl blur group-hover:opacity-30 transition duration-1000"></div>
                 <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                     <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop" alt="Maiku Radio Station" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <div class="border-2 border-brand/50 bg-black/60 backdrop-blur-sm p-6 rounded-lg text-center transform -skew-x-6">
-                            <h2 class="text-4xl font-black text-white italic tracking-tight shadow-black drop-shadow-lg">MAIKU <span class="text-brand">99.5</span> FM</h2>
-                            <p class="text-brand text-xs font-bold tracking-widest mt-1">YOUR MUSIC. YOUR STATION.</p>
+                        <div class="border-2 border-brand/50 bg-black/60 backdrop-blur-sm p-4 sm:p-6 rounded-lg text-center transform -skew-x-6">
+                            <h2 class="text-2xl sm:text-4xl font-black text-white italic tracking-tight shadow-black drop-shadow-lg">MAIKU <span class="text-brand">99.5</span> FM</h2>
+                            <p class="text-brand text-[10px] sm:text-xs font-bold tracking-widest mt-1">YOUR MUSIC. YOUR STATION.</p>
                         </div>
                     </div>
                 </div>
@@ -326,20 +358,17 @@
 
             <div class="relative reveal-left delay-200">
                 <div class="absolute inset-0 ph-map-bg -z-10 -right-20"></div>
-                <h2 class="text-brand font-bold text-lg mb-2 tracking-widest">ABOUT MAIKU 99.5 FM</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">Broadcasting Excellence from the Heart of Bicol.</h3>
+                <h2 class="text-brand font-bold text-base sm:text-lg mb-2 tracking-widest">ABOUT MAIKU 99.5 FM</h2>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">Broadcasting Excellence from the Heart of Bicol.</h3>
                 
-                <p class="text-gray-400 mb-4 leading-relaxed">
+                <p class="text-gray-400 text-sm sm:text-base mb-4 leading-relaxed">
                     Located in the heart of Nabua, Maiku 99.5 FM is a dynamic and modern radio station dedicated to delivering the best in music, entertainment, news, and community connection across the Bicol Region. Broadcasting from Camarines Sur, the station serves listeners with a fresh mix of today’s hottest hits, local favorites, engaging programs, and interactive on-air experiences.
                 </p>
-                <p class="text-gray-400 mb-4 leading-relaxed">
+                <p class="text-gray-400 text-sm sm:text-base mb-4 leading-relaxed font-light">
                     Driven by passion and innovation, Maiku 99.5 FM aims to become one of the leading voices in Bicol Region by providing quality entertainment and meaningful content that connects people through music and information. With its slogan, “Your Music. Your Station.”, Maiku 99.5 FM represents energy, creativity, and the true spirit of the local community.
                 </p>
-                <p class="text-gray-400 mb-8 leading-relaxed">
-                    Whether it’s music that inspires, stories that matter, or moments that bring listeners together, Maiku 99.5 FM is committed to being the soundtrack of everyday life in Bicol and beyond.
-                </p>
                 
-                <a href="#about" class="inline-flex items-center gap-2 border border-brand text-brand hover:bg-brand hover:text-dark px-8 py-3 rounded-full font-bold transition-colors active:scale-95 transform">
+                <a href="#about" class="inline-flex items-center gap-2 border border-brand text-brand hover:bg-brand hover:text-dark px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold transition-all text-sm sm:text-base active:scale-95 transform mt-4">
                     LEARN MORE <i class="ph-bold ph-caret-right"></i>
                 </a>
 
@@ -356,31 +385,31 @@
     </section>
 
     <!-- FOOTER -->
-    <footer id="contact" class="bg-[#050505] border-t border-white/10 pt-16 pb-6 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 border-b border-white/10 pb-10">
+    <footer id="contact" class="bg-[#050505] border-t border-white/10 pt-12 sm:pt-16 pb-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 md:gap-10 border-b border-white/10 pb-8 sm:pb-10">
             
             <div class="flex flex-col items-start leading-none group reveal-right">
-                <h1 class="text-4xl font-black italic tracking-tight flex items-center gap-1 text-white">MAIKU</h1>
-                <h2 class="text-brand font-black text-2xl italic tracking-tight -mt-1">99.5 FM</h2>
-                <p class="text-[9px] tracking-widest text-white mt-2 font-semibold uppercase">Your Music. Your Station.</p>
+                <h1 class="text-3xl sm:text-4xl font-black italic tracking-tight flex items-center gap-1 text-white">MAIKU</h1>
+                <h2 class="text-brand font-black text-xl sm:text-2xl italic tracking-tight -mt-1">99.5 FM</h2>
+                <p class="text-[8px] sm:text-[9px] tracking-widest text-white mt-2 font-semibold uppercase">Your Music. Your Station.</p>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-8 text-sm text-gray-400 reveal-up delay-100">
+            <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 text-xs sm:text-sm text-gray-400 reveal-up delay-100">
                 <div class="flex items-start gap-3">
-                    <i class="ph-fill ph-map-pin text-brand text-xl animate-pulse"></i>
+                    <i class="ph-fill ph-map-pin text-brand text-lg sm:text-xl animate-pulse"></i>
                     <p>Nabua, Camarines Sur<br>Bicol, Philippines</p>
                 </div>
                 <div class="flex flex-col gap-3 justify-center">
                     <div class="flex items-center gap-3">
-                        <i class="ph-fill ph-envelope-simple text-brand text-xl"></i>
+                        <i class="ph-fill ph-envelope-simple text-brand text-lg sm:text-xl"></i>
                         <p>luzonmarcneil@gmail.com</p>
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col items-center md:items-end gap-6 reveal-left delay-200">
-                <div class="flex items-center gap-3 bg-brand text-dark px-6 py-3 rounded-xl font-black text-xl leading-none shadow-[0_0_15px_rgba(255,215,0,0.2)]">
-                    <i class="ph-fill ph-microphone-stage text-3xl animate-bounce"></i>
+                <div class="flex items-center gap-3 bg-brand text-dark px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-black text-lg sm:text-xl leading-none shadow-[0_0_15px_rgba(255,215,0,0.2)]">
+                    <i class="ph-fill ph-microphone-stage text-2xl sm:text-3xl animate-bounce"></i>
                     <div class="flex flex-col">
                         <span>LIVE ON AIR</span>
                         <span>24/7</span>
@@ -389,13 +418,28 @@
             </div>
 
         </div>
-        <div class="text-center pt-6 text-xs text-gray-600 reveal-up delay-300">
+        <div class="text-center pt-6 text-[10px] sm:text-xs text-gray-600 reveal-up delay-300">
             &copy; 2026 Maiku 99.5 FM. All Rights Reserved.
         </div>
     </footer>
 
     <!-- SYSTEM SCRIPTS -->
     <script>
+        // Toggle Mobile menu drawer smoothly
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-drawer');
+            const menuIcon = document.getElementById('mobile-menu-icon');
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+                menuIcon.className = "ph ph-x";
+            } else {
+                drawer.classList.remove('translate-x-0');
+                drawer.classList.add('translate-x-full');
+                menuIcon.className = "ph ph-list";
+            }
+        }
+
         // Smooth scrolling navigation controller
         function updateNavState(hash) {
             if (!hash || hash === '') hash = '#home';
@@ -444,8 +488,8 @@
         // Initialize intersection observer for cascading scroll reveals
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = { 
-                threshold: 0.1, 
-                rootMargin: "0px 0px -50px 0px" 
+                threshold: 0.05, 
+                rootMargin: "0px 0px -30px 0px" 
             };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -591,6 +635,9 @@
 
         function handleKnobMove(e) {
             if (!isDraggingKnob) return;
+            // Prevent scrolling on mobile/tablets while dragging the dial knob
+            if (e.cancelable) e.preventDefault();
+
             const knob = document.getElementById('volume-knob');
             if (!knob) return;
             const rect = knob.getBoundingClientRect();
@@ -766,13 +813,13 @@
             if (!nowPlayingTitle) return;
             if (!isServerConnected) {
                 nowPlayingTitle.innerText = "Checking feed status...";
-                nowPlayingTitle.className = "font-medium text-sm truncate max-w-[250px] transition-all text-red-500";
+                nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-red-500";
             } else if (!isPlaying) {
                 nowPlayingTitle.innerText = "Ready to Play";
-                nowPlayingTitle.className = "font-medium text-sm truncate max-w-[250px] transition-all text-gray-400";
+                nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-gray-400";
             } else {
                 nowPlayingTitle.innerText = currentStreamTitle;
-                nowPlayingTitle.className = "font-medium text-sm truncate max-w-[250px] transition-all text-brand";
+                nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-brand";
             }
         }
         
