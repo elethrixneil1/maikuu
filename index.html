@@ -81,7 +81,7 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
 
-        /* Responsive LED dots to prevent overflow on small mobile displays */
+        /* Responsive LED dots */
         .led-dot {
             width: 5px;
             height: 5px;
@@ -91,19 +91,8 @@
             transition: all 0.05s ease-in-out;
         }
         
-        @media (min-width: 380px) {
-            .led-dot {
-                width: 6.5px;
-                height: 6.5px;
-            }
-        }
-
-        @media (min-width: 440px) {
-            .led-dot {
-                width: 7.5px;
-                height: 7.5px;
-            }
-        }
+        @media (min-width: 380px) { .led-dot { width: 6.5px; height: 6.5px; } }
+        @media (min-width: 440px) { .led-dot { width: 7.5px; height: 7.5px; } }
         
         .led-dot.active.green { background-color: #00ff55; box-shadow: 0 0 8px #00ff55, inset 0 1px 0 rgba(255,255,255,0.4); }
         .led-dot.active.yellow { background-color: #FFD700; box-shadow: 0 0 8px #FFD700, inset 0 1px 0 rgba(255,255,255,0.4); }
@@ -124,25 +113,10 @@
         }
 
         /* Entrance Animations */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-up.active, .reveal-right.active, .reveal-left.active {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
+        .reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-right { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-left { opacity: 0; transform: translateX(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-up.active, .reveal-right.active, .reveal-left.active { opacity: 1; transform: translate(0, 0); }
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
@@ -151,14 +125,12 @@
             from { transform: translateY(-100%); }
             to { transform: translateY(0); }
         }
-        .header-anim {
-            animation: slideDown 0.8s ease-out forwards;
-        }
+        .header-anim { animation: slideDown 0.8s ease-out forwards; }
     </style>
 </head>
 <body class="antialiased">
 
-    <audio id="radio-stream" src="https://stream.zeno.fm/aef1z5aiz16uv" preload="none" crossorigin="anonymous"></audio>
+    <audio id="radio-stream" preload="none"></audio>
 
     <!-- HEADER & NAVIGATION -->
     <header class="fixed w-full top-0 z-50 bg-dark/95 backdrop-blur-md border-b border-white/5 transition-all duration-300 header-anim" id="header">
@@ -239,7 +211,7 @@
                 </div>
             </div>
 
-            <!-- PLAYER MODULE (Matching image_74d6e9.png) -->
+            <!-- PLAYER MODULE -->
             <div class="flex justify-center lg:justify-end reveal-left delay-200">
                 <div class="glass-player rounded-[2rem] p-4 sm:p-6 md:p-8 w-full max-w-md relative overflow-hidden">
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand/10 rounded-full blur-3xl -z-10"></div>
@@ -278,10 +250,10 @@
                         </div>
                     </div>
 
-                    <!-- WIDESCREEN VU METER & ROTARY DIAL (Aligned with image_74d6e9.png) -->
+                    <!-- WIDESCREEN VU METER & ROTARY DIAL -->
                     <div class="bg-[#0b0b0d] rounded-2xl p-4 sm:p-5 border border-white/[0.04] flex flex-row items-center justify-between gap-3 sm:gap-4 shadow-inner">
                         
-                        <!-- Symmetrical Horizontal LED Rows (24 segments each, Left Channel Top, Right Channel Bottom) -->
+                        <!-- Symmetrical Horizontal LED Rows -->
                         <div class="flex flex-col gap-1.5 sm:gap-2 flex-1 overflow-hidden" id="led-matrix-wrapper">
                             <div class="flex gap-[2px] sm:gap-[3.5px] w-full justify-between" id="led-row-left">
                                 <!-- Dynamic LED columns loaded by JavaScript -->
@@ -291,7 +263,7 @@
                             </div>
                         </div>
                         
-                        <!-- Charcoal Rotary Dial with Cardinal Slate Calibration Markers -->
+                        <!-- Charcoal Rotary Dial -->
                         <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center select-none shrink-0">
                             <div class="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-slate-600 rounded-full"></div>
                             <div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-slate-600 rounded-full"></div>
@@ -308,7 +280,17 @@
 
                     </div>
 
-                    <div class="text-center mt-5 sm:mt-6 flex justify-center items-center gap-2 text-red-500 font-bold text-[10px] sm:text-xs tracking-widest">
+                    <!-- STREAM SELECTOR -->
+                    <div class="flex justify-center gap-3 mt-5 sm:mt-6">
+                        <button id="btn-stream-0" onclick="switchStream(0)" class="px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border border-brand bg-brand text-dark shadow-[0_0_10px_rgba(255,215,0,0.3)]">
+                            STREAM 1
+                        </button>
+                        <button id="btn-stream-1" onclick="switchStream(1)" class="px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border border-white/20 text-gray-400 hover:text-white hover:border-white/50">
+                            STREAM 2
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-3 sm:mt-4 flex justify-center items-center gap-2 text-red-500 font-bold text-[10px] sm:text-xs tracking-widest">
                         <i class="ph ph-broadcast"></i>
                         LIVE STREAM BROADCAST
                         <i class="ph ph-broadcast"></i>
@@ -464,10 +446,7 @@
                     e.preventDefault();
                     history.pushState(null, null, targetId);
                     updateNavState(targetId);
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
@@ -476,9 +455,7 @@
             const currentHash = window.location.hash || '#home';
             updateNavState(currentHash);
             const targetElement = document.querySelector(currentHash);
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         });
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -487,22 +464,15 @@
 
         // Initialize intersection observer for cascading scroll reveals
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = { 
-                threshold: 0.05, 
-                rootMargin: "0px 0px -30px 0px" 
-            };
+            const observerOptions = { threshold: 0.05, rootMargin: "0px 0px -30px 0px" };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    } else {
-                        entry.target.classList.remove('active');
-                    }
+                    if (entry.isIntersecting) { entry.target.classList.add('active'); } 
+                    else { entry.target.classList.remove('active'); }
                 });
             }, observerOptions);
 
-            const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
-            revealElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
         });
 
         // Add scrolled background effect to sticky header
@@ -517,7 +487,19 @@
             }
         });
 
-        // Audio System Components
+        // ============================================
+        // AUDIO SYSTEM COMPONENTS & FALLBACK MECHANISM
+        // ============================================
+        
+        // Define audio streams with Primary and Secondary/Fallback
+        const streamUrls = [
+            "https://stream.zeno.fm/aef1z5aiz16uv",
+            "https://uk21freenew.listen2myradio.com/live.mp3?typeportmount=s1_5460"
+        ];
+        
+        let currentStreamIndex = 0;
+        let corsRetried = false;
+
         const audio = document.getElementById('radio-stream');
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
@@ -531,11 +513,11 @@
         let analyser = null;
         let dataArray = null;
         let source = null;
-        let corsBlocked = false;
+        let corsBlocked = true; // Default to true, only enable if Web Audio API init succeeds
         let silentFrames = 0;
 
         function initAudioContext() {
-            if (!audioCtx) {
+            if (!audioCtx && audio.crossOrigin === "anonymous") {
                 try {
                     const AudioContext = window.AudioContext || window.webkitAudioContext;
                     audioCtx = new AudioContext();
@@ -547,21 +529,23 @@
                     analyser.connect(audioCtx.destination);
                     
                     dataArray = new Uint8Array(analyser.frequencyBinCount);
+                    corsBlocked = false; // Successfully initialized
                 } catch (e) {
-                    console.warn("Audio Context init blocked or not permitted (CORS restriction standard check):", e);
+                    console.warn("Audio Context init blocked or not permitted:", e);
                     corsBlocked = true;
                 }
-            }
-            if (audioCtx && audioCtx.state === 'suspended') {
-                audioCtx.resume();
+            } else if (audio.crossOrigin !== "anonymous") {
+                 // if it's not anonymous, don't even try to connect source node
+                 corsBlocked = true;
+                 if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
             }
         }
 
-        function togglePlay() {
+        function updateUIState() {
             const npContainer = document.getElementById('now-playing-container');
-            
-            if (isPlaying) {
-                audio.pause();
+            if (!isPlaying) {
                 playIcon.style.display = 'block';
                 pauseIcon.style.display = 'none';
                 if(npContainer) npContainer.style.display = 'none';
@@ -571,18 +555,6 @@
                 if(heroPlayText) heroPlayText.innerText = 'LISTEN LIVE';
                 if(heroPlayIcon) heroPlayIcon.className = 'ph-fill ph-play-circle text-2xl';
             } else {
-                audio.src = "https://stream.zeno.fm/aef1z5aiz16uv?nocache=" + new Date().getTime();
-                audio.load(); 
-                
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        initAudioContext();
-                    }).catch(error => {
-                        console.warn("Browser autoplay block triggered. Awaiting user gestures.");
-                    });
-                }
-                
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
                 if(npContainer) npContainer.style.display = 'block';
@@ -592,23 +564,129 @@
                 if(heroPlayText) heroPlayText.innerText = 'PAUSE STREAM';
                 if(heroPlayIcon) heroPlayIcon.className = 'ph-fill ph-pause-circle text-2xl';
             }
-            isPlaying = !isPlaying;
             if (typeof updateTitleDisplay === 'function') updateTitleDisplay();
         }
 
-        audio.addEventListener('error', function() {
-            if (audio.crossOrigin === "anonymous") {
-                console.log("CORS stream blockage caught. Reconnecting with basic fallback mode...");
-                audio.removeAttribute('crossOrigin');
-                corsBlocked = true; 
-                audio.src = "https://stream.zeno.fm/aef1z5aiz16uv?nocache=" + new Date().getTime();
-                audio.load();
-                if (isPlaying) {
-                    audio.play().catch(e => console.error("Playback recovery failed:", e));
-                }
+        function playCurrentStream() {
+            const url = streamUrls[currentStreamIndex];
+            
+            // Set crossOrigin BEFORE setting src
+            if (currentStreamIndex === 0 && !corsRetried) {
+                audio.setAttribute('crossOrigin', 'anonymous');
             } else {
-                isServerConnected = false;
-                updateTitleDisplay();
+                audio.removeAttribute('crossOrigin');
+            }
+
+            // FIX: Only append cache busting to Zeno streams. Listen2MyRadio rejects these params.
+            if (url.includes('zeno.fm') && !corsRetried) {
+                const separator = url.includes('?') ? '&' : '?';
+                audio.src = url + separator + "nocache=" + new Date().getTime();
+            } else {
+                audio.src = url; 
+            }
+            
+            audio.load(); 
+            
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    initAudioContext();
+                }).catch(error => {
+                    console.warn("Playback initialization message:", error);
+                });
+            }
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                updateUIState();
+            } else {
+                isPlaying = true;
+                
+                // If restarting from the primary stream, reset our CORS attributes to try again
+                if (currentStreamIndex === 0) {
+                    corsRetried = false;
+                }
+                
+                playCurrentStream();
+                updateUIState();
+            }
+        }
+
+        // UI Updater for Stream Buttons
+        function updateStreamButtons(index) {
+            const btn0 = document.getElementById('btn-stream-0');
+            const btn1 = document.getElementById('btn-stream-1');
+            
+            if (index === 0) {
+                btn0.className = "px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border border-brand bg-brand text-dark shadow-[0_0_10px_rgba(255,215,0,0.3)]";
+                btn1.className = "px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border border-white/20 text-gray-400 hover:text-white hover:border-white/50";
+            } else {
+                btn1.className = "px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border border-brand bg-brand text-dark shadow-[0_0_10px_rgba(255,215,0,0.3)]";
+                btn0.className = "px-4 py-1.5 rounded-full text-[10px] sm:text-xs font-bold transition-all border border-white/20 text-gray-400 hover:text-white hover:border-white/50";
+            }
+        }
+
+        // Manual Stream Switcher
+        function switchStream(index) {
+            if (currentStreamIndex === index) return; 
+            
+            currentStreamIndex = index;
+            updateStreamButtons(index);
+
+            if (isPlaying) {
+                audio.pause();
+                
+                if (index === 0) {
+                    corsRetried = false;
+                } else {
+                    corsRetried = true;
+                }
+                
+                playCurrentStream();
+            }
+            updateTitleDisplay();
+        }
+
+        // Automatic Stream Switcher and Error Handler
+        audio.addEventListener('error', function(e) {
+            console.warn("Stream error encountered:", e);
+            
+            // Try standard CORS mitigation on primary stream first
+            if (audio.crossOrigin === "anonymous" && !corsRetried && currentStreamIndex === 0) {
+                console.log("CORS stream blockage caught. Attempting standard retry...");
+                corsBlocked = true;
+                corsRetried = true;
+                if (isPlaying) playCurrentStream(); // re-calls with removed crossOrigin
+            } else {
+                console.log("Stream failed completely. Switching to fallback stream...");
+                currentStreamIndex++;
+                
+                if (currentStreamIndex < streamUrls.length) {
+                    corsRetried = true; 
+                    corsBlocked = true; // Fallback will use simulated visualizer data automatically
+                    
+                    updateStreamButtons(currentStreamIndex);
+                    
+                    if (isPlaying) playCurrentStream();
+                    updateTitleDisplay();
+                } else {
+                    console.error("All streams failed.");
+                    isServerConnected = false;
+                    currentStreamIndex = 0; // Reset for next interaction try
+                    corsRetried = false;
+                    updateStreamButtons(0);
+                    isPlaying = false;
+                    updateUIState();
+                    
+                    const nowPlayingTitle = document.getElementById('now-playing-title');
+                    if (nowPlayingTitle) {
+                        nowPlayingTitle.innerText = "All streams currently offline.";
+                        nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-red-500";
+                    }
+                }
             }
         });
 
@@ -635,7 +713,6 @@
 
         function handleKnobMove(e) {
             if (!isDraggingKnob) return;
-            // Prevent scrolling on mobile/tablets while dragging the dial knob
             if (e.cancelable) e.preventDefault();
 
             const knob = document.getElementById('volume-knob');
@@ -670,7 +747,7 @@
         // STEREO VU MATRIX GENERATION
         const ledRowLeft = document.getElementById('led-row-left');
         const ledRowRight = document.getElementById('led-row-right');
-        const cols = 24; // 24 discrete hardware nodes matching image_74d6e9.png
+        const cols = 24;
         
         let leftLeds = [];
         let rightLeds = [];
@@ -681,12 +758,10 @@
         let smoothedLeft = 0; 
         let smoothedRight = 0;
 
-        // Gravity/Fall physics velocity components for pause decay effect
         let leftFallVelocity = 0;
         let rightFallVelocity = 0;
-        const gravity = 30; // decay acceleration speed in steps per second squared
+        const gravity = 30;
 
-        // Generate physical matching column segments (0-14 Green, 15-19 Yellow, 20-23 Red)
         for(let i = 0; i < cols; i++) {
             let colorClass = 'green';
             if(i >= 15 && i < 20) colorClass = 'yellow';
@@ -703,38 +778,30 @@
             rightLeds.push(ledR);
         }
 
-        // Standard Left-to-Right Stereo lighting matrix updating
         function updateLEDs(leftLevel, rightLevel) {
             leftLeds.forEach((led, index) => {
-                if (index < leftLevel) {
-                    led.classList.add('active');
-                } else {
-                    led.classList.remove('active');
-                }
+                if (index < leftLevel) { led.classList.add('active'); } 
+                else { led.classList.remove('active'); }
             });
 
             rightLeds.forEach((led, index) => {
-                if (index < rightLevel) {
-                    led.classList.add('active');
-                } else {
-                    led.classList.remove('active');
-                }
+                if (index < rightLevel) { led.classList.add('active'); } 
+                else { led.classList.remove('active'); }
             });
         }
 
-        // Symmetrical dual-row display controller with falling pause graphics
         function renderLoopFrame(timestamp) {
             if (!lastTime) lastTime = timestamp;
-            const delta = Math.min((timestamp - lastTime) / 1000, 0.1); // Cap delta to prevent visual jumps on window sleep
+            const delta = Math.min((timestamp - lastTime) / 1000, 0.1);
             lastTime = timestamp;
 
             if (isPlaying) {
-                // Reset falling velocities while playing active streams
                 leftFallVelocity = 0;
                 rightFallVelocity = 0;
 
                 let targetLevel = 0;
 
+                // Use Web Audio API data if not blocked
                 if (analyser && dataArray && !corsBlocked) {
                     analyser.getByteFrequencyData(dataArray);
                     
@@ -747,9 +814,7 @@
 
                     if (sum === 0 && !audio.paused) {
                         silentFrames++;
-                        if (silentFrames > 100) {
-                            corsBlocked = true; 
-                        }
+                        if (silentFrames > 100) { corsBlocked = true; }
                     } else {
                         silentFrames = 0;
                     }
@@ -757,6 +822,7 @@
                     targetLevel = (avg / 110) * cols * currentVolume;
                 }
 
+                // Use simulated fallback data if blocked or if fallback stream is active
                 if (corsBlocked || !analyser) {
                     beatTimer += delta;
                     const beatPeriod = 0.48; 
@@ -764,22 +830,17 @@
 
                     let baseVal = Math.sin(timestamp * 0.009) * 4 + 7; 
 
-                    if (isBeat) {
-                        baseVal += Math.random() * 8 + 6;
-                    } else {
-                        baseVal += Math.random() * 4;
-                    }
+                    if (isBeat) { baseVal += Math.random() * 8 + 6; } 
+                    else { baseVal += Math.random() * 4; }
 
                     targetLevel = baseVal * currentVolume;
                 }
 
                 targetLevel = Math.min(cols, Math.max(0, targetLevel));
                 
-                // Symmetrical simultaneous update ("sabay")
                 smoothedLeft = smoothedLeft + (targetLevel - smoothedLeft) * 0.35;
                 smoothedRight = smoothedRight + (targetLevel - smoothedRight) * 0.35;
             } else {
-                // HIGH-FIDELITY FALLING GRAVITY PHYSICS ("Bumabagsak" effect upon pausing)
                 leftFallVelocity += gravity * delta;
                 rightFallVelocity += gravity * delta;
 
@@ -787,15 +848,10 @@
                 smoothedRight = Math.max(0, smoothedRight - rightFallVelocity * delta);
             }
 
-            const finalLeftCols = Math.round(smoothedLeft);
-            const finalRightCols = Math.round(smoothedRight);
-
-            updateLEDs(finalLeftCols, finalRightCols);
-
+            updateLEDs(Math.round(smoothedLeft), Math.round(smoothedRight));
             visualizerTimeout = requestAnimationFrame(renderLoopFrame);
         }
 
-        // Start animation frame loop immediately on window load
         window.onload = function () {
             lastTime = 0;
             smoothedLeft = 0;
@@ -811,12 +867,22 @@
 
         function updateTitleDisplay() {
             if (!nowPlayingTitle) return;
+            
+            if (!isPlaying) {
+                nowPlayingTitle.innerText = "Ready to Play";
+                nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-gray-400";
+                return;
+            }
+
+            if (currentStreamIndex > 0) {
+                nowPlayingTitle.innerText = "Maiku 99.5 FM (Backup Stream)";
+                nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-brand";
+                return;
+            }
+
             if (!isServerConnected) {
                 nowPlayingTitle.innerText = "Checking feed status...";
                 nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-red-500";
-            } else if (!isPlaying) {
-                nowPlayingTitle.innerText = "Ready to Play";
-                nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-gray-400";
             } else {
                 nowPlayingTitle.innerText = currentStreamTitle;
                 nowPlayingTitle.className = "font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all text-brand";
