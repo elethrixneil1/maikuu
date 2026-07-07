@@ -231,7 +231,7 @@
                         </div>
                         <div class="flex items-center justify-center gap-2 text-brand px-4">
                             <i class="ph-fill ph-music-notes text-sm shrink-0"></i>
-                            <p id="now-playing-title" class="font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all font-semibold">Checking feed status...</p>
+                            <p id="now-playing-" class="font-medium text-xs sm:text-sm truncate max-w-[200px] sm:max-w-[250px] transition-all font-semibold">Checking feed status...</p>
                         </div>
                     </div>
 
@@ -890,7 +890,7 @@
         }
         
         if (nowPlayingTitle) {
-            const metadataUrl = 'https://api.zeno.fm/mounts/metadata/subscribe/aef1z5aiz16uv';
+            const metadataUrl = 'https://maikuserver.devcoderz.site/currentsong?sid=1';
             const evtSource = new EventSource(metadataUrl);
 
             evtSource.onopen = function() {
