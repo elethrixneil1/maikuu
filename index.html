@@ -578,7 +578,7 @@
             }
 
             // FIX: Only append cache busting to Zeno streams. Listen2MyRadio rejects these params.
-            if (url.includes('maikuserver.devcoderz.site/currentsong?sid=1') && !corsRetried) {
+            if (url.includes('maikuserver.devcoderz.site') && !corsRetried) {
                 const separator = url.includes('?') ? '&' : '?';
                 audio.src = url + separator + "nocache=" + new Date().getTime();
             } else {
