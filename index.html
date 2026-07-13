@@ -890,7 +890,7 @@
         }
         
         if (nowPlayingTitle) {
-            const metadataUrl = 'https://maikuserver.devcoderz.site/currentsong?sid=1';
+            const metadataUrl = 'https://maikuserver.devcoderz.site/currentmetadata?sid=1';
             const evtSource = new EventSource(metadataUrl);
 
             evtSource.onopen = function() {
